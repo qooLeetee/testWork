@@ -1,0 +1,4 @@
+**/postgresVolume/**
+**/.vs/**
+**/obj/**
+**/bin/**
