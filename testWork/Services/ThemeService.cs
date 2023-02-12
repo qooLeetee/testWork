@@ -5,7 +5,6 @@ using testWork.Models;
 
 namespace testWork.Services
 {
-
     public class ThemeService
     {
         public List<ThemeResponse> getThemeList()
@@ -18,7 +17,7 @@ namespace testWork.Services
                 {
                     ThemeResponse themeResponse= new ThemeResponse();
                     themeResponse.title = theme.title;
-                    themeResponse.Id = theme.Id;
+                    themeResponse.id = theme.id;
                     ThemeResposes.Add(themeResponse);
                 }
                 return ThemeResposes;

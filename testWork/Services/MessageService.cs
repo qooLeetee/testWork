@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using testWork.Controllers.DTO.Requests;
+﻿using testWork.Controllers.DTO.Requests;
 using testWork.Controllers.DTO.Responses;
 using testWork.Models;
 
@@ -17,26 +16,28 @@ namespace testWork.Services
                 var message = new Message();
 
                 var theme = db.Themes
-                 .Where(c => c.Id == messageRequest.themeId)
-                 .FirstOrDefault();
+                    .FirstOrDefault(c => c.id == messageRequest.theme.id);
 
                 if (theme != null)
                 {
-                    message.Theme = theme;
+                    message.theme = theme;
+                }
+                else
+                {
+                    throw new Exception("Тема не найдена"); 
                 }
 
-                message.Content = messageRequest.Content;
+                message.content = messageRequest.content;
 
                 var contact = db.Contacts
-                .Where(c => c.Name == messageRequest.Contact.Name && c.Phone == messageRequest.Contact.Phone)
-                .FirstOrDefault();
+                    .FirstOrDefault(c => c.name == messageRequest.contact.name && c.phone == messageRequest.contact.phone);
 
                 if (contact != null)
                 {
-                    message.Contact = contact;
+                    message.contact = contact;
 
                     db.Messages.Add(message);
-                    contact.Message.Add(message);
+                    contact.messages.Add(message);
 
                     db.SaveChanges();
 
@@ -44,12 +45,12 @@ namespace testWork.Services
                 }
                 else
                 {
-                    contact = contactService.createContact(messageRequest.Contact);
+                    contact = contactService.createContact(messageRequest.contact);
                     db.Contacts.Attach(contact);
 
-                    message.Contact = contact;
+                    message.contact = contact;
 
-                    contact.Message.Add(message);
+                    contact.messages.Add(message);
                     db.SaveChanges();
 
                     return createMessageResponse(message);
@@ -62,7 +63,7 @@ namespace testWork.Services
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 List<Message> messagesOfContact = new List<Message>();
-                messagesOfContact.AddRange(db.Messages.Where(m => m.ContactId == id));
+                messagesOfContact.AddRange(db.Messages.Where(m => m.contact.id == id));
                 List<MessageResponse> messageResponses = new List<MessageResponse>();
                 foreach (var message in messagesOfContact) {
                     messageResponses.Add(createMessageResponse(message));
@@ -76,7 +77,7 @@ namespace testWork.Services
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 List<Message> messagesOfContact = new List<Message>();
-                messagesOfContact.AddRange(db.Messages.Where(m => m.ThemeId == id));
+                messagesOfContact.AddRange(db.Messages.Where(m => m.theme.id == id));
                 List<MessageResponse> messageResponses = new List<MessageResponse>();
                 foreach (var message in messagesOfContact)
                 { 
@@ -89,10 +90,10 @@ namespace testWork.Services
         private MessageResponse createMessageResponse(Message message)
         {
             MessageResponse response = new MessageResponse();
-            response.Id = message.Id;
-            response.ThemeId = message.ThemeId;
-            response.Content = message.Content;
-            response.ContactId = message.ContactId;
+            response.id = message.id;
+            response.themeId = message.theme.id;
+            response.content = message.content;
+            response.contactId = message.contact.id;
 
             return response;
         }

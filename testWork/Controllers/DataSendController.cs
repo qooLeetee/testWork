@@ -5,10 +5,10 @@ using testWork.Models;
 using testWork.Services;
 
 namespace testWork.Controllers
-{    
+{
     [ApiController]
     [Route("api/[controller]")]
-    
+
     public class DataSendController : Controller
     {
         ThemeService themeService = new ThemeService();
@@ -63,6 +63,5 @@ namespace testWork.Controllers
         {
             return messageService.getMessagesByThemeId(id);
         }
-
     }
 }

@@ -2,9 +2,9 @@
 {
     public class MessageResponse
     {
-        public int? Id { get; set; }
-        public string? Content { get; set; }
-        public int? ContactId { get; set; }
-        public int? ThemeId { get; set; }
+        public int id { get; set; }
+        public string content { get; set; }
+        public int contactId { get; set; }
+        public int themeId { get; set; }
     }
 }

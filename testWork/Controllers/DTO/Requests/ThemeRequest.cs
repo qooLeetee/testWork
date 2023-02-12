@@ -2,6 +2,7 @@
 {
     public class ThemeRequest
     {
+        public int id { get; set; }
         public string title { get; set; }
     }
 }

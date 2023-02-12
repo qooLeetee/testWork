@@ -7,12 +7,9 @@ namespace testWork.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int? Id { get; set; }
-        public string? Content { get; set; }
-        public Contact Contact { get; set; }
-        public Theme Theme { get; set; }
-
-        public int? ContactId { get; set; }
-        public int? ThemeId { get; set; }
+        public int id { get; set; }
+        public string content { get; set; }
+        public Contact contact { get; set; }
+        public Theme theme { get; set; }
     }
 }

@@ -5,7 +5,7 @@ namespace testWork.Controllers.DTO.Responses
 {
     public class ThemeResponse
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         public string title { get; set; }
     }
 }

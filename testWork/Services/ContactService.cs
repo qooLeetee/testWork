@@ -17,10 +17,10 @@ namespace testWork.Services
                 foreach (var contact in Contacts)
                 {
                     ContactResponse contactResponse = new ContactResponse();
-                    contactResponse.Id = (int)contact.Id;
-                    contactResponse.Name = contact.Name;
-                    contactResponse.Email = contact.Email;
-                    contactResponse.Phone = contact.Phone;
+                    contactResponse.id = (int)contact.id;
+                    contactResponse.name = contact.name;
+                    contactResponse.email = contact.email;
+                    contactResponse.phone = contact.phone;
                     contactResponses.Add(contactResponse);
                 }
                 return contactResponses;
@@ -32,9 +32,9 @@ namespace testWork.Services
             Contact contact = new Contact();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                contact.Name = contactRequest.Name;
-                contact.Email = contactRequest.Email;
-                contact.Phone = contactRequest.Phone;
+                contact.name = contactRequest.name;
+                contact.email = contactRequest.email;
+                contact.phone = contactRequest.phone;
 
                 db.Contacts.Add(contact);
                 db.SaveChanges();

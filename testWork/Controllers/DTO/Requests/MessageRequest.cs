@@ -4,8 +4,8 @@ namespace testWork.Controllers.DTO.Requests
 {
     public class MessageRequest
     {
-        public string Content { get; set; }
-        public ContactRequest Contact { get; set; }
-        public int themeId { get; set; }
+        public string content { get; set; }
+        public ContactRequest contact { get; set; }
+        public ThemeRequest theme { get; set; }
     }
 }
