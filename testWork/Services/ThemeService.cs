@@ -16,8 +16,8 @@ namespace testWork.Services
                 foreach (var theme in Themes)
                 {
                     ThemeResponse themeResponse= new ThemeResponse();
-                    themeResponse.title = theme.title;
-                    themeResponse.id = theme.id;
+                    themeResponse.title = theme.Title;
+                    themeResponse.id = theme.Id;
                     ThemeResposes.Add(themeResponse);
                 }
                 return ThemeResposes;
@@ -29,7 +29,7 @@ namespace testWork.Services
             Theme theme = new Theme();
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                theme.title = themeRequest.title;
+                theme.Title = themeRequest.title;
                 db.Themes.Add(theme);
                 db.SaveChanges();
             }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using testWork.Models;
 
 namespace testWork
@@ -13,6 +14,13 @@ namespace testWork
         {
             Database.EnsureCreated();
         }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql(

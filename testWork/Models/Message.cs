@@ -7,9 +7,16 @@ namespace testWork.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-        public string content { get; set; }
-        public Contact contact { get; set; }
-        public Theme theme { get; set; }
+        public int Id { get; set; }
+        public string Content { get; set; }
+        public Contact Contact { get; set; }
+        public Theme Theme { get; set; }
+
+        [ForeignKey(nameof(Contact))]
+        public int ContactId { get; set; }
+
+        [ForeignKey(nameof(Theme))]
+        public int ThemeId { get; set; }
+
     }
 }

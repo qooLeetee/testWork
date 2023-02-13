@@ -7,8 +7,8 @@ namespace testWork.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-        public string title { get; set; }
-        public List<Message> messages { get; set; } = new List<Message>();
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public ICollection<Message> Messages { get; set; } = new List<Message>();
     }
 }

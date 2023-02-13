@@ -16,28 +16,28 @@ namespace testWork.Services
                 var message = new Message();
 
                 var theme = db.Themes
-                    .FirstOrDefault(c => c.id == messageRequest.theme.id);
+                    .FirstOrDefault(c => c.Id == messageRequest.theme.id);
 
                 if (theme != null)
                 {
-                    message.theme = theme;
+                    message.Theme = theme;
                 }
                 else
                 {
                     throw new Exception("Тема не найдена"); 
                 }
 
-                message.content = messageRequest.content;
+                message.Content = messageRequest.content;
 
                 var contact = db.Contacts
-                    .FirstOrDefault(c => c.name == messageRequest.contact.name && c.phone == messageRequest.contact.phone);
+                    .FirstOrDefault(c => c.Name == messageRequest.contact.name && c.Phone == messageRequest.contact.phone);
 
                 if (contact != null)
                 {
-                    message.contact = contact;
+                    message.Contact = contact;
 
                     db.Messages.Add(message);
-                    contact.messages.Add(message);
+                    contact.Messages.Add(message);
 
                     db.SaveChanges();
 
@@ -48,9 +48,9 @@ namespace testWork.Services
                     contact = contactService.createContact(messageRequest.contact);
                     db.Contacts.Attach(contact);
 
-                    message.contact = contact;
+                    message.Contact = contact;
 
-                    contact.messages.Add(message);
+                    contact.Messages.Add(message);
                     db.SaveChanges();
 
                     return createMessageResponse(message);
@@ -63,7 +63,7 @@ namespace testWork.Services
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 List<Message> messagesOfContact = new List<Message>();
-                messagesOfContact.AddRange(db.Messages.Where(m => m.contact.id == id));
+                messagesOfContact.AddRange(db.Messages.Where(m => m.Contact.Id == id));
                 List<MessageResponse> messageResponses = new List<MessageResponse>();
                 foreach (var message in messagesOfContact) {
                     messageResponses.Add(createMessageResponse(message));
@@ -77,10 +77,10 @@ namespace testWork.Services
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
                 List<Message> messagesOfContact = new List<Message>();
-                messagesOfContact.AddRange(db.Messages.Where(m => m.theme.id == id));
+                messagesOfContact.AddRange(db.Messages.Where(m => m.ThemeId == id));
                 List<MessageResponse> messageResponses = new List<MessageResponse>();
                 foreach (var message in messagesOfContact)
-                { 
+                {
                     messageResponses.Add(createMessageResponse(message));
                 }
                 return messageResponses;
@@ -90,10 +90,10 @@ namespace testWork.Services
         private MessageResponse createMessageResponse(Message message)
         {
             MessageResponse response = new MessageResponse();
-            response.id = message.id;
-            response.themeId = message.theme.id;
-            response.content = message.content;
-            response.contactId = message.contact.id;
+            response.id = message.Id;
+            response.themeId = message.ThemeId;
+            response.content = message.Content;
+            response.contactId = message.ContactId;
 
             return response;
         }
